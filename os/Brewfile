@@ -1,0 +1,30 @@
+# This is used instead of versions
+tap 'homebrew/core'
+tap 'homebrew/cask'
+
+# ============================================================================
+# DevOps
+# ============================================================================
+brew 'awscli'
+# Script for perform authentications inside amazon
+brew 'aws-iam-authenticator'
+cask 'docker'
+# Terminal GUI to manage and watch Kubernetes resources
+brew 'k9s'
+# Kubectl plugin manager
+brew 'krew'
+# Local kubernetes cluster
+brew 'minikube'
+# Required for local port forwarding in a public IP
+cask 'ngrok'
+# Hashicorp tool to create images
+brew 'packer'
+# To manage multiples versions of terraform
+brew 'tfenv'
+# To manage virtual machines
+cask 'vagrant'
+cask 'virtualbox'
+
+# Required for Ansible to ssh machines without prompt ssh
+tap 'hudochenkov/sshpass'
+brew 'sshpass'
