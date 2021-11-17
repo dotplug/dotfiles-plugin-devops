@@ -5,6 +5,7 @@ function create_aws_credentials() {
 }
 
 function create_aws_config() {
+    mkdir -p $HOME/.aws
     merge_files "aws-config" "$DOTFILES_DIR" "$HOME/.aws/config"
 }
 
