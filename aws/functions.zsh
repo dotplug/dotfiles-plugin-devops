@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-function create_aws_credentials() {
-    merge_files "aws-credentials" "$DOTFILES_DIR" "$HOME/.aws/credentials"
-}
-
-function create_aws_configuration() {
-    mkdir -p $HOME/.aws
-    merge_files "aws-config" "$DOTFILES_DIR" "$HOME/.aws/config"
-}
-
 # Access using SSM to an instance.
 # Args:
 #   * profile: AWS profile to use to authenticate into the account
