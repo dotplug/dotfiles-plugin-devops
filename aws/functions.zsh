@@ -53,3 +53,46 @@ function ssm-p {
     --document-name AWS-StartPortForwardingSession \
     --parameters "{\"portNumber\":[\"$remote_port\"],\"localPortNumber\":[\"$local_port\"]}"
 }
+
+
+function associate-vpc-with-hosted-zone() {
+  # Process based on https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
+  local ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE=$1
+  local HOSTED_ZONE_TO_ASSOCIATE=$2
+
+  local ACCOUNT_PROFILE_THAT_CREATED_VPC=$3
+  local VPC_ID_TO_ASSOCIATE=$4
+  local VPC_REGION=$5
+
+  if [[ $# -ne 5 ]]; then
+    echo "Usage associate-vpc-with-hosted-zone <ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE> <HOSTED_ZONE_TO_ASSOCIATE> <ACCOUNT_PROFILE_THAT_CREATED_VPC> <VPC_ID_TO_ASSOCIATE> <VPC_REGION>"
+    return 0
+  fi
+
+  # Step 1 - create association authorization
+  echo aws --profile $ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE --region eu-west-1 route53 create-vpc-association-authorization --hosted-zone-id $HOSTED_ZONE_TO_ASSOCIATE --vpc VPCRegion=$VPC_REGION,VPCId=$VPC_ID_TO_ASSOCIATE
+  # Step 2 - associate vpc with hosted zone
+  echo aws --profile $ACCOUNT_PROFILE_THAT_CREATED_VPC --region eu-west-1 route53 associate-vpc-with-hosted-zone --hosted-zone-id $HOSTED_ZONE_TO_ASSOCIATE --vpc VPCRegion=$VPC_REGION,VPCId=$VPC_ID_TO_ASSOCIATE
+  # Step 3 - delete association authorization
+  echo aws --profile $ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE --region eu-west-1 route53 delete-vpc-association-authorization --hosted-zone-id $HOSTED_ZONE_TO_ASSOCIATE --vpc VPCRegion=$VPC_REGION,VPCId=$VPC_ID_TO_ASSOCIATE
+}
+
+
+function disassociate-vpc-from-hosted-zone() {
+  # Process based on https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
+  local ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE=$1
+  local HOSTED_ZONE_TO_ASSOCIATE=$2
+
+  local ACCOUNT_PROFILE_THAT_CREATED_VPC=$3
+  local VPC_ID_TO_ASSOCIATE=$4
+  local VPC_REGION=$5
+
+  if [[ $# -ne 5 ]]; then
+    echo "Usage disassociate-vpc-from-hosted-zone <ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE> <HOSTED_ZONE_TO_ASSOCIATE> <ACCOUNT_PROFILE_THAT_CREATED_VPC> <VPC_ID_TO_ASSOCIATE> <VPC_REGION>"
+    return 0
+  fi
+
+  # Step 1 - Disassociate vpc from hosted zone
+  echo aws --profile $ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE --region eu-west-1 route53 disassociate-vpc-from-hosted-zone --hosted-zone-id $HOSTED_ZONE_TO_ASSOCIATE --vpc VPCRegion=$VPC_REGION,VPCId=$VPC_ID_TO_ASSOCIATE
+}
+
