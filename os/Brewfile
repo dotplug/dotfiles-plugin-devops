@@ -1,13 +1,18 @@
 # This is used instead of versions
 tap 'homebrew/core'
 tap 'homebrew/cask'
+tap 'aws/tap'
 
 # ============================================================================
 # DevOps
 # ============================================================================
+# AWS Cli console.
 brew 'awscli'
 # Script for perform authentications inside amazon
 brew 'aws-iam-authenticator'
+# EC2 instance selector helper CLI tool
+brew 'ec2-instance-selector'
+
 cask 'docker'
 # Terminal GUI to manage and watch Kubernetes resources
 brew 'k9s'
