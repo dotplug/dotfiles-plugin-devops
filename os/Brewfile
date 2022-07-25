@@ -33,3 +33,7 @@ cask 'virtualbox'
 # Required for Ansible to ssh machines without prompt ssh
 tap 'hudochenkov/sshpass'
 brew 'sshpass'
+
+
+# To create infrastructure diagrams
+brew 'graphviz'
