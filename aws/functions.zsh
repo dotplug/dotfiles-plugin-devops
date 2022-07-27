@@ -19,6 +19,10 @@ function ssm() {
 }
 
 
+# List all EC2 instances inside an account
+# Args:
+#   * profile: AWS profile to use to authenticate into the account
+#   * region: where the instance lives. By default eu-west-1
 function ssm-instance-list {
   if [ "$#" -lt 1 ]; then
     echo "Usage: ssm-instance-list <profile> <region>"
@@ -37,6 +41,12 @@ function ssm-instance-list {
   fi
 }
 
+# Forward a local port with an EC2 instance using SSM.
+# Args:
+#   * profile: AWS profile to use to authenticate into the account
+#   * instance id: to access with SSM
+#   * remote_port: remote port to forward
+#   * local_port: remote port to forward
 function ssm-p {
   if [ $# -ne 4 ]
   then
@@ -55,6 +65,15 @@ function ssm-p {
 }
 
 
+# Associate an VPN with their hosted zone. It will:
+#   1. Create the association authorization.
+#   2. Associate the VPC with the hosted zone.
+#   3. Delete the association authorization.
+# Args:
+#   * account profile that created the hosted zone: The AWS profile where the hosted zone to share is created.
+#   * hosted zone to associate: The AWS hosted zone ID that you want to associate
+#   * account profile that created the VPC: The AWS profile where the VPC to share is created.
+#   * vpc id: The VPC ID that want to have the association.
 function associate-vpc-with-hosted-zone() {
   # Process based on https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
   local ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE=$1
@@ -78,6 +97,13 @@ function associate-vpc-with-hosted-zone() {
 }
 
 
+# Disassociate an VPN with their hosted zone.
+# Args:
+#   * account profile that created the hosted zone: The AWS profile where the hosted zone to share is created.
+#   * hosted zone to associate: The AWS hosted zone ID that you want to associate
+#   * account profile that created the VPC: The AWS profile where the VPC to share is created.
+#   * vpc id: The VPC ID that want to have the association.
+#   * vpc region: The VPC ID that want to have the association.
 function disassociate-vpc-from-hosted-zone() {
   # Process based on https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
   local ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE=$1

@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# Get the stding and filter using the $PATTERN_TO_SEARCH and create a terragrunt state mv command with the new name of the state resource.
-function tg_mv_state() {
+# Get the stding and filter using the $PATTERN_TO_SEARCH and create a `terragrunt state mv` command with the new name of the state resource.
+function tg-mv-state() {
+
   PATTERN_TO_SEARCH=$1
   NEW_PATTERN=$2
 
-  FILTERED_STATES=$(grep $PATTERN_TO_SEARCH)
-
-  if [[ $# == 2 ]]; then
-    while IFS='$\n' read -r ORIGINAL; do
-      NEW_STATE_NAME=$(echo $ORIGINAL | sed -e "s/$PATTERN_TO_SEARCH/$NEW_PATTERN/g")
-      echo terragrunt state mv $ORIGINAL $NEW_STATE_NAME
-      # NOTE: Uncomment this to perform the state move
-      # terragrunt state mv $ORIGINAL $NEW_STATE_NAME
-    done < <(echo $FILTERED_STATES)
-  else
-    echo 'terragrunt state list| tg_mv_state "current state name" "new state name"'
+  if [[ $# != 2 ]]; then
+    echo 'terragrunt state list| tg-mv-state "current state name" "new state name"'
     exit 1
   fi
+
+  FILTERED_STATES=$(grep $PATTERN_TO_SEARCH)
+
+  while IFS='$\n' read -r ORIGINAL; do
+    NEW_STATE_NAME=$(echo $ORIGINAL | sed -e "s/$PATTERN_TO_SEARCH/$NEW_PATTERN/g")
+    echo "command to execute: terragrunt state mv $ORIGINAL $NEW_STATE_NAME"
+    terragrunt state mv $ORIGINAL $NEW_STATE_NAME
+  done < <(echo $FILTERED_STATES)
 }
 
 # Function to refacor all batches state secrets
