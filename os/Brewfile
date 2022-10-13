@@ -34,6 +34,8 @@ cask 'virtualbox'
 tap 'hudochenkov/sshpass'
 brew 'sshpass'
 
+# Watch the cost of your infrastructure
+brew 'infracost'
 
 # To create infrastructure diagrams
 brew 'graphviz'
