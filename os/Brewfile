@@ -26,16 +26,15 @@ cask 'ngrok'
 brew 'packer'
 # To manage multiples versions of terraform
 brew 'tfenv'
+# To get vulnerabilities
+brew 'tfsec'
+# To get generate documentation
+brew 'terraform-docs'
+
 # To manage virtual machines
 cask 'vagrant'
-cask 'virtualbox'
+# cask 'virtualbox'
 
 # Required for Ansible to ssh machines without prompt ssh
 tap 'hudochenkov/sshpass'
 brew 'sshpass'
-
-# Watch the cost of your infrastructure
-brew 'infracost'
-
-# To create infrastructure diagrams
-brew 'graphviz'

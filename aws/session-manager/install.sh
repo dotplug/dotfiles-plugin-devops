@@ -27,6 +27,9 @@ cd ~/Downloads
 curl 'https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip' -o 'sessionmanager-bundle.zip'
 unzip sessionmanager-bundle.zip
 sudo ./sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
+if [[ $? != 0 ]];then
+  red "Plugin is not installed, take a look at the installation process"
+fi
 
 blue "$0 - Delete downloaded zip"
 rm ~/Downloads/sessionmanager-bundle.zip
