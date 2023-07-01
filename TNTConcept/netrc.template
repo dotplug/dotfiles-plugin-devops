@@ -1,0 +1,3 @@
+machine tnt.autentia.com
+    login USERNAME
+    password PASSWORD
