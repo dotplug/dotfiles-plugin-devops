@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DOTFILES_DIR="$HOME/.dotfiles"
+
 # Access using SSM to an instance.
 # Args:
 #   * profile: AWS profile to use to authenticate into the account
@@ -120,5 +122,34 @@ function disassociate-vpc-from-hosted-zone() {
 
   # Step 1 - Disassociate vpc from hosted zone
   echo aws --profile $ACCOUNT_PROFILE_THAT_CREATED_HOSTED_ZONE --region eu-west-1 route53 disassociate-vpc-from-hosted-zone --hosted-zone-id $HOSTED_ZONE_TO_ASSOCIATE --vpc VPCRegion=$VPC_REGION,VPCId=$VPC_ID_TO_ASSOCIATE
+}
+
+
+# Summary: Search for all SOURCE_FILE inside SOURCE_FOLDER and generates the DESTINATION_FILE
+function merge_files() {
+    local SOURCE_FILE=$1
+    local SOURCE_FOLDER=$2
+    local DESTINATION_FILE=$3
+
+    blue "Cleanup $DESTINATION_FILE"
+    rm $DESTINATION_FILE
+
+    blue "Search for $SOURCE_FILE inside $SOURCE_FOLDER"
+    cat $(find -H "$SOURCE_FOLDER" -type f -name "$SOURCE_FILE") >> $DESTINATION_FILE
+
+    green "Generated $DESTINATION_FILE"
+}
+
+# Get all aws-credentials file to generate the credentials file combined
+function create_aws_credentials() {
+    mkdir -p "$HOME/.aws"
+    merge_files "aws-credentials" "$DOTFILES_DIR" "$HOME/.aws/credentials"
+    merge_files "aws-mfa-credentials" "$DOTFILES_DIR" "$HOME/.aws/mfa_credentials"
+}
+
+# Get all aws-config file to generate the config file combined
+function create_aws_configuration() {
+    mkdir -p "$HOME/.aws"
+    merge_files "aws-config" "$DOTFILES_DIR" "$HOME/.aws/config"
 }
 
