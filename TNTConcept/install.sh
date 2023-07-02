@@ -13,7 +13,7 @@ setup_netrc () {
     set_debug_file_label "$BASH_SOURCE"
 
     local netrc_filepath=$HOME/.netrc
-    local netrc_path_template=$DOTFILES_ROOT/plugins/dotfiles-plugin-personal/TNTConcept/netrc.template
+    local netrc_path_template=$DOTFILES_ROOT/plugins/dotfiles-plugin-devops/TNTConcept/netrc.template
 
     blue "[TNT Concept] Check if $netrc_filepath exist"
 
@@ -43,7 +43,15 @@ setup_netrc () {
     fi
 }
 
+
+setup_pipconf () {
+    local pipconf_path_template=$DOTFILES_ROOT/plugins/dotfiles-plugin-devops/TNTConcept/pip.conf.template
+    mkdir -p $HOME/.config/pip
+    cp $pipconf_path_template $HOME/.config/pip/pip.conf
+}
+
 setup_netrc
+setup_pipconf
 
 blue "[TNT Concept] Check that at least python 3.7 is installed"
 python3 --version
