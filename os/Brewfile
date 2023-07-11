@@ -25,6 +25,8 @@ brew 'packer'
 brew 'tfenv'
 # To get vulnerabilities
 brew 'tfsec'
+# To lint Terraform files
+brew 'tflint'
 # To get generate documentation
 brew 'terraform-docs'
 
