@@ -65,3 +65,6 @@ python3 -m pip install --upgrade TNTGitHook --user
 blue "[TNT Concept] Setup credentials"
 python3 -m TNTGitHook --set-credentials
 
+blue "[TNT Concept] Remove the pip.conf file"
+rm $HOME/.config/pip/pip.conf
+
