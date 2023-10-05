@@ -62,6 +62,9 @@ python3 -m pip config list
 blue "[TNT Concept] Install TNTGitHook in the system"
 python3 -m pip install --upgrade TNTGitHook --user
 
+blue "[TNT Concept] Ensure we can write in the keychain from terminal (may ask credentials)"
+security unlock-keychain "${HOME}/Library/Keychains/login.keychain-db"
+
 blue "[TNT Concept] Setup credentials"
 python3 -m TNTGitHook --set-credentials
 
