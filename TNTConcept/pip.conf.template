@@ -1,5 +1,0 @@
-[global]
-index = https://pypi.python.org/pypi/
-index-url = https://pypi.python.org/simple/
-extra-index-url = https://tnt.autentia.com/nexus/repository/autentia-pypi/simple/
-trusted-host = tnt.autentia.com
