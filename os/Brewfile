@@ -19,8 +19,6 @@ brew 'krew'
 brew 'minikube'
 # Required for local port forwarding in a public IP
 cask 'ngrok'
-# Hashicorp tool to create images
-brew 'packer'
 # To manage multiples versions of terraform
 brew 'tfenv'
 # To get vulnerabilities
