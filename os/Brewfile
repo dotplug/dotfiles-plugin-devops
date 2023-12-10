@@ -1,4 +1,5 @@
 tap 'aws/tap'
+tap 'hashicorp/tap'
 
 # ============================================================================
 # DevOps
@@ -27,10 +28,14 @@ brew 'tfsec'
 brew 'tflint'
 # To get generate documentation
 brew 'terraform-docs'
+# To get the infrastructure cost
+brew 'infracost'
 
 # To manage virtual machines
 cask 'vagrant'
 # cask 'virtualbox'
+# To build infrastructure images
+brew 'hashicorp/tap/packer'
 
 # Required for Ansible to ssh machines without prompt ssh
 tap 'hudochenkov/sshpass'
