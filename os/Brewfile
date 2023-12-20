@@ -40,3 +40,6 @@ brew 'hashicorp/tap/packer'
 # Required for Ansible to ssh machines without prompt ssh
 tap 'hudochenkov/sshpass'
 brew 'sshpass'
+
+# To have yq
+cask 'yq'
