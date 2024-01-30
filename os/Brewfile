@@ -42,4 +42,4 @@ tap 'hudochenkov/sshpass'
 brew 'sshpass'
 
 # To have yq
-cask 'yq'
+brew 'yq'
