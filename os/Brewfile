@@ -43,3 +43,7 @@ brew 'sshpass'
 
 # To have yq
 brew 'yq'
+
+# To execute the Terraform Resource Generator tool
+cask 'google-chrome'
+cask 'chromedriver'
