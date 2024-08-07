@@ -12,6 +12,10 @@ brew 'aws-iam-authenticator'
 brew 'ec2-instance-selector'
 
 cask 'docker'
+# To build Helm charts
+brew 'helm'
+# To document helm charts
+brew 'helm-docs'
 # Terminal GUI to manage and watch Kubernetes resources
 brew 'k9s'
 # Kubectl plugin manager
@@ -20,10 +24,16 @@ brew 'krew'
 brew 'minikube'
 # Required for local port forwarding in a public IP
 cask 'ngrok'
+# To format properly shell scripts
+brew 'shfmt'
+# To perform checks in shell scripts
+brew 'shellcheck'
 # To manage multiples versions of terraform
 brew 'tfenv'
 # To get vulnerabilities
 brew 'tfsec'
+# To get vulnerabilities (succesor of tfsec)
+brew 'trivy'
 # To lint Terraform files
 brew 'tflint'
 # To get generate documentation
