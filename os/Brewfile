@@ -1,9 +1,9 @@
 tap 'aws/tap'
 tap 'hashicorp/tap'
 
-# ============================================================================
-# DevOps
-# ============================================================================
+# ======
+# Devops
+# ======
 # AWS Cli console.
 brew 'awscli'
 # Script for perform authentications inside amazon
@@ -13,6 +13,7 @@ brew 'ec2-instance-selector'
 
 cask 'docker'
 # To build Helm charts
+
 brew 'helm'
 # To document helm charts
 brew 'helm-docs'
@@ -22,12 +23,15 @@ brew 'k9s'
 brew 'krew'
 # Local kubernetes cluster
 brew 'minikube'
+
+#
 # Required for local port forwarding in a public IP
 cask 'ngrok'
 # To format properly shell scripts
 brew 'shfmt'
 # To perform checks in shell scripts
 brew 'shellcheck'
+
 # To manage multiples versions of terraform
 brew 'tfenv'
 # To get vulnerabilities
@@ -51,9 +55,6 @@ brew 'hashicorp/tap/packer'
 tap 'hudochenkov/sshpass'
 brew 'sshpass'
 
-# To have yq
-brew 'yq'
-
 # To execute the Terraform Resource Generator tool
-cask 'google-chrome'
 cask 'chromedriver'
+cask 'google-chrome'
